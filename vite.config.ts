@@ -6,7 +6,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/talking-javascript-buddy/", // Add base path for GitHub Pages
+  base: "/talking-javascript-buddy/", // Base path for GitHub Pages
   server: {
     host: "::",
     port: 8080,
