@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Send } from "lucide-react";
 import ChatMessage from "./ChatMessage";
+import CommunicationKey from "./CommunicationKey";
 import { getResponseForMessage } from "@/utils/chatBotUtils";
 import { cn } from "@/lib/utils";
 
@@ -25,6 +26,7 @@ const ChatBot = () => {
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [connectionKey, setConnectionKey] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom when messages update
@@ -76,11 +78,30 @@ const ChatBot = () => {
     }
   };
 
+  const handleConnect = (key: string) => {
+    setConnectionKey(key);
+    
+    // Add connection message
+    const connectionMessage: Message = {
+      id: `system-${Date.now()}`,
+      text: `Connected with key: ${key}. You can now chat with the connected user.`,
+      isBot: true,
+      timestamp: new Date(),
+    };
+    
+    setMessages((prev) => [...prev, connectionMessage]);
+  };
+
   return (
     <div className="flex flex-col h-[600px] max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
       <div className="bg-indigo-600 p-4 text-white">
         <h2 className="text-xl font-bold">Friendly ChatBot</h2>
-        <p className="text-xs opacity-75">Always here to chat</p>
+        <p className="text-xs opacity-75">
+          {connectionKey 
+            ? `Connected with key: ${connectionKey}` 
+            : "Always here to chat"
+          }
+        </p>
       </div>
       
       <div className="flex-1 p-4 overflow-y-auto bg-gray-50">
@@ -104,7 +125,9 @@ const ChatBot = () => {
       </div>
       
       <div className="p-4 border-t">
-        <div className="flex gap-2">
+        <CommunicationKey onConnect={handleConnect} />
+        
+        <div className="flex gap-2 mt-4">
           <Input
             type="text"
             placeholder="Type your message..."

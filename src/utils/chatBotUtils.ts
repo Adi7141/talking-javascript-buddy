@@ -86,6 +86,24 @@ const getRandomItem = <T>(array: T[]): T => {
   return array[Math.floor(Math.random() * array.length)];
 };
 
+// Generate a unique communication key
+export const generateCommunicationKey = (): string => {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  const keyLength = 8;
+  let result = '';
+  
+  for (let i = 0; i < keyLength; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  
+  return result;
+};
+
+// Validate communication key format
+export const isValidCommunicationKey = (key: string): boolean => {
+  return /^[A-Z0-9]{8}$/.test(key);
+};
+
 // Main function to process input and return a response
 export const getResponseForMessage = (message: string): string => {
   const lowerMessage = message.toLowerCase();
