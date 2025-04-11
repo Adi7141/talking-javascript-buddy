@@ -1,13 +1,12 @@
 
-import ChatBot from "@/components/ChatBot";
+import { useState } from "react";
+import ChatApp from "@/components/ChatApp";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-purple-50 p-4">
-      <div className="w-full max-w-md">
-        <h1 className="text-3xl font-bold text-center mb-6 text-indigo-800">JavaScript Chatbot</h1>
-        <p className="text-center text-gray-600 mb-6">Connect with others using your unique communication key</p>
-        <ChatBot />
+    <div className="min-h-screen bg-[#0E1621] flex items-center justify-center p-4">
+      <div className="w-full max-w-5xl h-[85vh] rounded-xl overflow-hidden shadow-2xl">
+        <ChatApp />
       </div>
     </div>
   );
